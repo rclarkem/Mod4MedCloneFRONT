@@ -13,7 +13,10 @@ export default class StoryCard extends Component {
 		const { title } = this.props.story
 		// console.log(this.props.story)
 		return (
-			<div className='ui raised link card'>
+			<div
+				className='ui raised link card'
+				onClick={e => this.props.handleClickEventStory(this.props.story)}
+			>
 				<div className='content'>
 					<div className='header'>{title}</div>
 					<div className='meta'>
