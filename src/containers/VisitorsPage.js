@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import Stories from '../components/Stories'
 import Header from '../components/Header'
+import { Redirect } from 'react-router-dom'
+import ShowBlogs from '../components/ShowBlogs'
 
 export default class VisitorsPage extends Component {
 	state = {
 		allStories: [],
-		story: {},
 	}
 
 	componentDidMount() {
@@ -21,19 +22,16 @@ export default class VisitorsPage extends Component {
 
 	// TODO: Add a jumbotron welcoming to the site
 
-	handleClickEventStory = storyObj => {
-		console.log(storyObj)
-	}
-
 	render() {
-		console.log(this.state.allStories)
+		// console.log(this.state.allStories)
+
 		return (
 			<div>
 				<Header body={'Recent Stories'} />
 				<Stories
 					stories={this.state.allStories}
 					vistor={true}
-					handleClickEventStory={this.handleClickEventStory}
+					handleClickEventStory={this.props.handleClickEventStory}
 				/>
 			</div>
 		)

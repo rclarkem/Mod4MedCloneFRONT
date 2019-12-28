@@ -32,6 +32,16 @@
 	border: #282c34; */
 }
 
+.container {
+	/* position: relative; */
+	display: inline-block;
+}
+
+/* .ui.grid {
+	flex-wrap: nowrap;
+	min-height: 100%;
+} */
+
 .App-link {
 	color: #61dafb;
 }

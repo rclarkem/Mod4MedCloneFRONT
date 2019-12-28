@@ -7,7 +7,7 @@ export default function Navbar(props) {
 	return (
 		<div className='topnav'>
 			{!props.loggedInUser && !props.loggedIn ? (
-				<LoginNav />
+				<LoginNav goBackHome={props.goBackHome} />
 			) : (
 				<LogOut loggedInUser={props.loggedInUser} />
 			)}
