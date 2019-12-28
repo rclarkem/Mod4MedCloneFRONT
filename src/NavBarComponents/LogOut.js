@@ -13,11 +13,12 @@ export default function LogOut(props) {
 						color: 'green',
 					}}
 				>
-					New Story
+					<i class='pencil alternate icon'></i>
+					New
 				</NavLink>
 
 				<NavLink to='/stories' className='item navbar-item'>
-					<i class='pencil alternate icon'></i>
+					stories
 				</NavLink>
 
 				<nav className='item navbar-item'>{props.loggedInUser}</nav>

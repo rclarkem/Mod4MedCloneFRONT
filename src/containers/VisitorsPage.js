@@ -11,11 +11,12 @@ export default class VisitorsPage extends Component {
 	componentDidMount() {
 		fetch('http://localhost:3000/stories')
 			.then(response => response.json())
-			.then(stories =>
+			.then(stories => {
+				const recentStories = stories.slice(-6)
 				this.setState({
-					allStories: stories,
-				}),
-			)
+					allStories: recentStories,
+				})
+			})
 	}
 
 	// TODO: Add a jumbotron welcoming to the site
@@ -25,6 +26,7 @@ export default class VisitorsPage extends Component {
 	}
 
 	render() {
+		console.log(this.state.allStories)
 		return (
 			<div>
 				<Header body={'Recent Stories'} />
