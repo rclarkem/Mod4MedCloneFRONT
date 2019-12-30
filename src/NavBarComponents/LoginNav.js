@@ -10,6 +10,9 @@ export default function LoginNav(props) {
 			<NavLink to='/signup' className='item navbar-item'>
 				Sign Up
 			</NavLink>
+			<NavLink to='/new_story' className='item navbar-item'>
+				New Stories
+			</NavLink>
 			<NavLink
 				to='/'
 				className='item navbar-item'

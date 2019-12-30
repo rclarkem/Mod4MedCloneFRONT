@@ -5,7 +5,7 @@ import { Container } from 'semantic-ui-react'
 export default function Stories(props) {
 	return (
 		<Container>
-			<div className=' ui three column grid'>
+			<div className='ui three column grid'>
 				{props.stories.map(story => {
 					return (
 						<StoryCard

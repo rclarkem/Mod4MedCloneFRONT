@@ -24,7 +24,6 @@ export default class MainPage extends Component {
 		// console.log(this.state.myStories)
 		return (
 			<div>
-				hello
 				{
 					<Stories
 						stories={this.state.myStories}

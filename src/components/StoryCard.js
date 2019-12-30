@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container } from 'semantic-ui-react'
+import { Container, Card } from 'semantic-ui-react'
 import ButtonFor from './ButtonFor'
 
 export default class StoryCard extends Component {

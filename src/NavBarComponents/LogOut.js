@@ -18,7 +18,7 @@ export default function LogOut(props) {
 				</NavLink>
 
 				<NavLink to='/stories' className='item navbar-item'>
-					stories
+					My Posts
 				</NavLink>
 
 				<NavLink
