@@ -2,7 +2,6 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
 export default function LoginNav(props) {
-	console.log(props)
 	return (
 		<div className='ui secondary menu'>
 			<NavLink to='/login' className='item right navbar-item'>

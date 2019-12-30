@@ -34,10 +34,15 @@ export default class App extends Component {
 		})
 	}
 
+	slugUrl = chicken => {
+		return chicken.split(' ').join('-')
+	}
+
 	//TODO: Add a function here to toggle loggedInUser, loggedIn and username and change state
 
 	render() {
-		console.log('STATE', this.state.story)
+		console.log('State', this.state.story)
+
 		return (
 			<div className='App'>
 				<BlogTitle />
@@ -58,11 +63,12 @@ export default class App extends Component {
 						<Route exact path='/login'>
 							<LogInForm />
 						</Route>
-						<Route path='/show-blog/'>
+						<Route path='/show-blog/:title'>
 							{this.state.story && (
 								<ShowBlogs
 									story={this.state.story}
 									goBackHome={this.goBackHome}
+									loggedInUser={this.state.loggedInUser}
 								/>
 							)}
 						</Route>
@@ -83,7 +89,9 @@ export default class App extends Component {
 						</Route>
 					</Switch>
 					{this.state.story ? (
-						<Redirect to='/show-blog' />
+						<Redirect
+							to={`/show-blog/${this.slugUrl(this.state.story.title)}`}
+						/>
 					) : (
 						<Redirect to='/' />
 					)}
