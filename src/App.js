@@ -20,11 +20,9 @@ export default class App extends Component {
 		loggedInUser: null,
 		email: '',
 		story: null,
-		// ? This needs to be the id of the User? (Yes)
 	}
 
 	handleClickEventStory = storyObj => {
-		// console.log(storyObj)
 		this.setState({
 			story: storyObj,
 		})
@@ -48,6 +46,7 @@ export default class App extends Component {
 						loggedInUser={this.state.loggedInUser}
 						goBackHome={this.goBackHome}
 						loggedIn={this.state.loggedIn}
+						name={this.state.name}
 					/>
 					<Switch>
 						<Route path='/new_story'>
@@ -59,18 +58,23 @@ export default class App extends Component {
 						<Route exact path='/login'>
 							<LogInForm />
 						</Route>
-						<Route path='/show-blog'>
-							<ShowBlogs
-								story={this.state.story}
-								goBackHome={this.goBackHome}
-							/>
+						<Route path='/show-blog/'>
+							{this.state.story && (
+								<ShowBlogs
+									story={this.state.story}
+									goBackHome={this.goBackHome}
+								/>
+							)}
 						</Route>
 						<Route exact path='/signup'>
 							<LogInForm />
 						</Route>
 						<Route exact path='/'>
 							{this.state.loggedInUser && this.state.loggedIn ? (
-								<UserMainPage loggedInUser={this.state.loggedInUser} />
+								<UserMainPage
+									loggedInUser={this.state.loggedInUser}
+									handleClickEventStory={this.handleClickEventStory}
+								/>
 							) : (
 								<VisitorsPage
 									handleClickEventStory={this.handleClickEventStory}
@@ -87,4 +91,14 @@ export default class App extends Component {
 			</div>
 		)
 	}
+}
+
+const tester = {
+	id: 1,
+	name: 'RC',
+	email: 'RC@edu.com',
+	password_digest: '123',
+	avatar: '123',
+	bio: 'social media apps are evil',
+	img: 'https://robohash.org/idseditaque.png?size=300x300&set=set1',
 }

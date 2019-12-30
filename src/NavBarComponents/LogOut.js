@@ -13,7 +13,7 @@ export default function LogOut(props) {
 						color: 'green',
 					}}
 				>
-					<i class='pencil alternate icon'></i>
+					<i className='pencil alternate icon'></i>
 					New
 				</NavLink>
 
@@ -21,7 +21,13 @@ export default function LogOut(props) {
 					stories
 				</NavLink>
 
-				<nav className='item navbar-item'>{props.loggedInUser}</nav>
+				<NavLink
+					to='/'
+					className='item navbar-item'
+					onClick={e => props.goBackHome(e.target.value)}
+				>
+					{props.loggedInUser.name}
+				</NavLink>
 
 				<NavLink exact to='/logout' className='item navbar-item'>
 					Logout

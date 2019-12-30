@@ -13,6 +13,7 @@ export default function Stories(props) {
 							key={story.id}
 							vistor={props.vistor}
 							handleClickEventStory={props.handleClickEventStory}
+							loggedInUser={props.loggedInUser}
 						/>
 					)
 				})}

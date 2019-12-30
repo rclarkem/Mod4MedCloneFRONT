@@ -1,24 +1,27 @@
 import React, { Component } from 'react'
 import { Container } from 'semantic-ui-react'
+import ButtonFor from './ButtonFor'
+
 export default class StoryCard extends Component {
+	state = { active: true }
+
+	onClick = () => this.setState(prevState => ({ active: !prevState.active }))
+
 	bodyOfText = () => {
-		// console.log(this.props.story.body.length)
 		return this.props.story.body.slice(0, 100)
 	}
 
-	//TODO: Seralizer for my author_id so that I can extract out their names to display
-	// TODO: Add Migration for images for stories table
-
 	render() {
 		const { title } = this.props.story
-		// console.log(this.props.story)
+		const { active } = this.state
+
 		return (
 			<div className='ui column'>
-				<div
-					className='ui raised link card'
-					onClick={e => this.props.handleClickEventStory(this.props.story)}
-				>
-					<div className='content'>
+				<div className='ui raised link card'>
+					<div
+						className='content'
+						onClick={e => this.props.handleClickEventStory(this.props.story)}
+					>
 						<div className='header'>{title}</div>
 						<div className='meta'>
 							<span className='category'>{this.bodyOfText()}</span>
@@ -32,16 +35,20 @@ export default class StoryCard extends Component {
 						<div className='right floated author'>
 							<img
 								className='ui avatar image'
-								src='/images/avatar/small/matt.jpg'
+								src={this.props.story.author_avatar}
 								alt='avatar'
-							/>{' '}
-							Matt
+							/>
+							{this.props.story.author_full_name}
 						</div>
-						{!this.props.vistor && (
-							<button className='ui active button'>
-								<i className='user icon'></i>Follow
-							</button>
-						)}
+						{!this.props.vistor &&
+						this.props.loggedInUser.id !== this.props.story.author_id ? (
+							<ButtonFor
+								active={this.state.active}
+								handleClick={this.onClick}
+								text1={'Follow'}
+								text2={'Followed'}
+							/>
+						) : null}
 					</div>
 				</div>
 			</div>

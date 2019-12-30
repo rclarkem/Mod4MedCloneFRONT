@@ -7,15 +7,31 @@ export default class MainPage extends Component {
 		followerStories: [],
 	}
 
-	// componentDidMount() {}
-	//** This should fetch to the user/:id */
+	componentDidMount() {
+		fetch('http://localhost:3000/stories')
+			.then(response => response.json())
+			.then(response => {
+				const stories = response.filter(story => {
+					return story.author_id === this.props.loggedInUser.id
+				})
+				this.setState({
+					myStories: stories,
+				})
+			})
+	}
 
 	render() {
+		// console.log(this.state.myStories)
 		return (
 			<div>
 				hello
-				{/* <Stories myStories={this.state.myStories} />
-				<Stories followerStories={this.state.myStories} /> */}
+				{
+					<Stories
+						stories={this.state.myStories}
+						handleClickEventStory={this.props.handleClickEventStory}
+						loggedInUser={this.props.loggedInUser}
+					/>
+				}
 			</div>
 		)
 	}
