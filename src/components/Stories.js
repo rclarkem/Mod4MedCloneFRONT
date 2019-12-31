@@ -1,11 +1,11 @@
 import React from 'react'
 import StoryCard from './StoryCard'
-import { Container } from 'semantic-ui-react'
+import { Container, Card } from 'semantic-ui-react'
 
 export default function Stories(props) {
 	return (
 		<Container>
-			<div className='ui three column grid'>
+			<Card.Group itemsPerRow={3}>
 				{props.stories.map(story => {
 					return (
 						<StoryCard
@@ -17,7 +17,7 @@ export default function Stories(props) {
 						/>
 					)
 				})}
-			</div>
+			</Card.Group>
 		</Container>
 	)
 }

@@ -16,8 +16,8 @@ import ShowBlogs from './components/ShowBlogs'
 
 export default class App extends Component {
 	state = {
-		loggedIn: true,
-		loggedInUser: tester,
+		loggedIn: false,
+		loggedInUser: null,
 		email: '',
 		story: null,
 	}
