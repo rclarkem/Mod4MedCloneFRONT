@@ -7,19 +7,15 @@ export default class StoryCard extends Component {
 
 	onClick = () => this.setState(prevState => ({ active: !prevState.active }))
 
-	bodyOfText = () => {
-		return this.props.story.body.slice(0, 200)
-	}
-
 	render() {
-		const { title, author_full_name } = this.props.story
+		const { title, author_full_name, body, story_length } = this.props.story
 		const { active } = this.state
 
 		return (
 			<Card>
 				<Card.Content header={title} />
 				<Card.Content
-					content={`${this.bodyOfText()}...`}
+					content={story_length}
 					onClick={e => this.props.handleClickEventStory(this.props.story)}
 				/>
 				{!this.props.vistor &&

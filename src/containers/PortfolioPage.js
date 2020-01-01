@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import Stories from '../components/Stories'
 import Header from '../components/Header'
+import Stories from '../components/Stories'
 
-export default class MainPage extends Component {
-	state = {
-		myStories: [],
-		followerStories: [],
-	}
+export default class PortfolioPage extends Component {
+	state = { myStories: [] }
 
 	componentDidMount() {
 		fetch(`http://localhost:3000/users/${this.props.loggedInUser.id}`)
@@ -18,18 +15,14 @@ export default class MainPage extends Component {
 			})
 	}
 
-	topThreeStories = () => {
-		return this.state.myStories.slice(-3)
-	}
-
 	render() {
 		return (
 			<div>
-				<Header body={'My Recent Stories'} />
+				<Header body={'My Stories'} />
 				<Stories
-					stories={this.topThreeStories()}
-					handleClickEventStory={this.props.handleClickEventStory}
+					stories={this.state.myStories}
 					loggedInUser={this.props.loggedInUser}
+					handleClickEventStory={this.props.handleClickEventStory}
 				/>
 			</div>
 		)

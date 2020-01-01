@@ -13,12 +13,12 @@ import BlogTitle from './components/BlogTitle'
 import VisitorsPage from './containers/VisitorsPage'
 import LogInForm from './NavBarComponents/LogInForm'
 import ShowBlogs from './components/ShowBlogs'
+import PortfolioPage from './containers/PortfolioPage'
 
 export default class App extends Component {
 	state = {
-		loggedIn: false,
-		loggedInUser: null,
-		email: '',
+		loggedIn: true,
+		loggedInUser: jamal,
 		story: null,
 	}
 
@@ -39,6 +39,7 @@ export default class App extends Component {
 	}
 
 	//TODO: Add a function here to toggle loggedInUser, loggedIn and username and change state
+	// ! ComponentDidMount()
 
 	render() {
 		console.log('State', this.state.story)
@@ -51,13 +52,19 @@ export default class App extends Component {
 						loggedInUser={this.state.loggedInUser}
 						goBackHome={this.goBackHome}
 						loggedIn={this.state.loggedIn}
-						name={this.state.name}
 					/>
 					<Switch>
 						<Route path='/new_story'>
 							<CreateBlog
 								loggedInUser={this.state.loggedInUser}
 								loggedIn={this.state.loggedIn}
+							/>
+						</Route>
+						<Route exact path='/stories'>
+							<PortfolioPage
+								loggedInUser={this.state.loggedInUser}
+								loggedIn={this.state.loggedIn}
+								handleClickEventStory={this.handleClickEventStory}
 							/>
 						</Route>
 						<Route exact path='/login'>
@@ -101,7 +108,7 @@ export default class App extends Component {
 	}
 }
 
-const tester = {
+const rc = {
 	id: 1,
 	name: 'RC',
 	email: 'RC@edu.com',
@@ -109,4 +116,14 @@ const tester = {
 	avatar: '123',
 	bio: 'social media apps are evil',
 	img: 'https://robohash.org/idseditaque.png?size=300x300&set=set1',
+}
+
+const jamal = {
+	id: 3,
+	name: 'Jamal',
+	email: 'Jamal@edu.com',
+	password_digest: '123',
+	avatar: '123',
+	bio: 'FAAAAAXXXX Them',
+	img: 'https://robohash.org/eosfacerenumquam.png?size=300x300&set=set1',
 }
