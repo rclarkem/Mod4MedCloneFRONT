@@ -18,7 +18,7 @@ import PortfolioPage from './containers/PortfolioPage'
 export default class App extends Component {
 	state = {
 		loggedIn: true,
-		loggedInUser: jamal,
+		loggedInUser: rc,
 		story: null,
 	}
 
@@ -34,8 +34,8 @@ export default class App extends Component {
 		})
 	}
 
-	slugUrl = chicken => {
-		return chicken.split(' ').join('-')
+	slugUrl = title => {
+		return title.split(' ').join('-')
 	}
 
 	addStories = storyObj => {
@@ -48,10 +48,10 @@ export default class App extends Component {
 				...storyObj,
 				author_id: this.state.loggedInUser.id,
 			}),
-		})
-			.then(response => response.json())
-			.then(response => console.log(response))
+		}).then(response => response.json())
 	}
+
+	// TODO: Add function to post comments to story
 
 	//TODO: Add a function here to toggle loggedInUser, loggedIn and username and change state
 	// ! ComponentDidMount()

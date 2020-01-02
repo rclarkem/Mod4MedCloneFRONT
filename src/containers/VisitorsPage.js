@@ -34,7 +34,7 @@ export default class VisitorsPage extends Component {
 					vistor={true}
 					handleClickEventStory={this.props.handleClickEventStory}
 				/>
-				<Header body={'Trending News'} />
+				{/* <Header body={'Trending News'} /> */}
 				{/* TODO: Add hrefs to news links */}
 				{/* <ArticleContainers /> */}
 			</div>
