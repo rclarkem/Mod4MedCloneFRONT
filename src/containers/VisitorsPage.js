@@ -3,7 +3,6 @@ import Stories from '../components/Stories'
 import Header from '../components/Header'
 import { Redirect } from 'react-router-dom'
 import ShowBlogs from '../components/ShowBlogs'
-import ArticleContainers from './ArticleContainers'
 
 export default class VisitorsPage extends Component {
 	state = {
@@ -34,9 +33,6 @@ export default class VisitorsPage extends Component {
 					vistor={true}
 					handleClickEventStory={this.props.handleClickEventStory}
 				/>
-				{/* <Header body={'Trending News'} /> */}
-				{/* TODO: Add hrefs to news links */}
-				{/* <ArticleContainers /> */}
 			</div>
 		)
 	}

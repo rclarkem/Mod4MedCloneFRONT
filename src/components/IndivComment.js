@@ -6,9 +6,11 @@ export default function IndivComment(props) {
 	return (
 		<div>
 			<Comment>
-				<Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
+				<Comment.Avatar src={props.comment.author_avatar} />
 				<Comment.Content>
-					<Comment.Author as='a'>Matt</Comment.Author>
+					<Comment.Author as='a'>
+						{props.comment.author_full_name}
+					</Comment.Author>
 					<Comment.Metadata>
 						<div>Today at 5:42PM</div>
 					</Comment.Metadata>

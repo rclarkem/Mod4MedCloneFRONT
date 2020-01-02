@@ -80,6 +80,18 @@ export default class App extends Component {
 								/>
 							)}
 						/>
+						{/* TODO: Route to profile Page */}
+						{/* <Route
+							path='/profile'
+							render={props => (
+								<CreateBlog
+									{...props}
+									loggedInUser={this.state.loggedInUser}
+									loggedIn={this.state.loggedIn}
+									addStories={this.addStories}
+								/>
+							)}
+						/> */}
 						<Route exact path='/stories'>
 							<PortfolioPage
 								loggedInUser={this.state.loggedInUser}
