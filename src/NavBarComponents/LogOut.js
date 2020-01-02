@@ -17,11 +17,16 @@ export default function LogOut(props) {
 					New
 				</NavLink>
 
-				<NavLink to='/stories' className='item navbar-item'>
+				<NavLink
+					to='/stories'
+					className='item navbar-item'
+					onClick={e => props.goBackHome(e.target.value)}
+				>
 					My Posts
 				</NavLink>
 
 				<NavLink
+					exact
 					to='/'
 					className='item navbar-item'
 					onClick={e => props.goBackHome(e.target.value)}

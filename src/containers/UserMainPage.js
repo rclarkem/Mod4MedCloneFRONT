@@ -25,7 +25,7 @@ export default class MainPage extends Component {
 	render() {
 		return (
 			<div>
-				<Header body={'My Recent Stories'} />
+				<Header body='My Recent Stories' />
 				<Stories
 					stories={this.topThreeStories()}
 					handleClickEventStory={this.props.handleClickEventStory}

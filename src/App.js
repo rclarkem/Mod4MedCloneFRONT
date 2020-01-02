@@ -38,6 +38,21 @@ export default class App extends Component {
 		return chicken.split(' ').join('-')
 	}
 
+	addStories = storyObj => {
+		fetch('http://localhost:3000/stories', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				...storyObj,
+				author_id: this.state.loggedInUser.id,
+			}),
+		})
+			.then(response => response.json())
+			.then(response => console.log(response))
+	}
+
 	//TODO: Add a function here to toggle loggedInUser, loggedIn and username and change state
 	// ! ComponentDidMount()
 
@@ -54,12 +69,17 @@ export default class App extends Component {
 						loggedIn={this.state.loggedIn}
 					/>
 					<Switch>
-						<Route path='/new_story'>
-							<CreateBlog
-								loggedInUser={this.state.loggedInUser}
-								loggedIn={this.state.loggedIn}
-							/>
-						</Route>
+						<Route
+							path='/new_story'
+							render={props => (
+								<CreateBlog
+									{...props}
+									loggedInUser={this.state.loggedInUser}
+									loggedIn={this.state.loggedIn}
+									addStories={this.addStories}
+								/>
+							)}
+						/>
 						<Route exact path='/stories'>
 							<PortfolioPage
 								loggedInUser={this.state.loggedInUser}

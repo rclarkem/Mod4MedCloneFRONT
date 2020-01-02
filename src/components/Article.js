@@ -6,7 +6,7 @@ export default function Article(props) {
 	}
 	const { article } = props
 
-	// console.log(props)
+	console.log(props)
 	return (
 		<Card
 			link

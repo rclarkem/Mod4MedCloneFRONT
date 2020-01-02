@@ -12,7 +12,7 @@ export default class CreateBlog extends Component {
 	}
 
 	render() {
-		console.log(this.props)
+		console.log(this.props.history)
 		return (
 			<div>
 				{/* TODO: OnClick Event to close Modal */}
@@ -25,7 +25,10 @@ export default class CreateBlog extends Component {
 						Visit our registration page, then try again
 					</div>
 				) : (
-					<NewBlogPost />
+					<NewBlogPost
+						addStories={this.props.addStories}
+						history={this.props.history}
+					/>
 				)}
 				{!this.state.clicked && <Redirect to='/signup' />}
 			</div>

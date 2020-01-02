@@ -36,7 +36,7 @@ export default class VisitorsPage extends Component {
 				/>
 				<Header body={'Trending News'} />
 				{/* TODO: Add hrefs to news links */}
-				<ArticleContainers />
+				{/* <ArticleContainers /> */}
 			</div>
 		)
 	}
