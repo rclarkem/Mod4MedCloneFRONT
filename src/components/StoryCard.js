@@ -10,7 +10,7 @@ export default class StoryCard extends Component {
 	render() {
 		const { title, author_full_name, body, story_length } = this.props.story
 		const { active } = this.state
-
+		console.log(this.props)
 		return (
 			<Card>
 				<Card.Content header={title} />
@@ -18,7 +18,7 @@ export default class StoryCard extends Component {
 					content={story_length}
 					onClick={e => this.props.handleClickEventStory(this.props.story)}
 				/>
-				{!this.props.vistor &&
+				{this.props.vistor &&
 				this.props.loggedInUser.id !== this.props.story.author_id ? (
 					<ButtonFor
 						active={this.state.active}

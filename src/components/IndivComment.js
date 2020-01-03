@@ -20,4 +20,3 @@ export default function IndivComment(props) {
 		</div>
 	)
 }
-// {props.comment.body}

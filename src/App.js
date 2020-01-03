@@ -6,6 +6,7 @@ import {
 	Route,
 	Switch,
 	Redirect,
+	withRouter,
 } from 'react-router-dom'
 import UserMainPage from './containers/UserMainPage'
 import CreateBlog from './components/CreateBlog'
@@ -15,11 +16,13 @@ import LogInForm from './NavBarComponents/LogInForm'
 import ShowBlogs from './components/ShowBlogs'
 import PortfolioPage from './containers/PortfolioPage'
 
-export default class App extends Component {
+class App extends Component {
 	state = {
 		loggedIn: true,
 		loggedInUser: rc,
 		story: null,
+		myStories: [],
+		newStory: false,
 	}
 
 	handleClickEventStory = storyObj => {
@@ -38,6 +41,16 @@ export default class App extends Component {
 		return title.split(' ').join('-')
 	}
 
+	componentDidMount() {
+		fetch(`http://localhost:3000/users/${this.state.loggedInUser.id}`)
+			.then(response => response.json())
+			.then(stories => {
+				this.setState({
+					myStories: stories.authored_stories,
+				})
+			})
+	}
+
 	addStories = storyObj => {
 		fetch('http://localhost:3000/stories', {
 			method: 'POST',
@@ -48,7 +61,51 @@ export default class App extends Component {
 				...storyObj,
 				author_id: this.state.loggedInUser.id,
 			}),
-		}).then(response => response.json())
+		})
+			.then(response => response.json())
+			.then(story =>
+				this.setState({
+					myStories: [...this.state.myStories, story],
+				}),
+			)
+	}
+
+	// addComment = async commentObj => {
+	// 	await fetch(`http://localhost:3000/comments`, {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({
+	// 			...commentObj,
+	// 			author_id: this.state.loggedInUser.id,
+	// 			story_id: this.state.story.id,
+	// 		}),
+	// 	})
+	// 		.then(response => response.json())
+	// 		.then(comment => {
+	// 			this.setState({
+	// 				myStories: [...this.state.myStories, comment],
+	// 				newStory: true,
+	// 			})
+	// 		})
+	// }
+
+	deleteStories = storyObj => {
+		fetch(`http://localhost:3000/stories/${storyObj.id}`, {
+			method: 'DELETE',
+		})
+			.then(response => response.json())
+			.then(deletedStory =>
+				this.setState(
+					{
+						myStories: this.state.myStories.filter(
+							story => deletedStory.id !== story.id,
+						),
+					},
+					() => this.props.history.push('/stories'),
+				),
+			)
 	}
 
 	// TODO: Add function to post comments to story
@@ -58,30 +115,31 @@ export default class App extends Component {
 
 	render() {
 		console.log('State', this.state.story)
+		console.log('State', this.state.myStories)
 
 		return (
 			<div className='App'>
 				<BlogTitle />
-				<Router>
-					<Navbar
-						loggedInUser={this.state.loggedInUser}
-						goBackHome={this.goBackHome}
-						loggedIn={this.state.loggedIn}
+				{/* <Router> */}
+				<Navbar
+					loggedInUser={this.state.loggedInUser}
+					goBackHome={this.goBackHome}
+					loggedIn={this.state.loggedIn}
+				/>
+				<Switch>
+					<Route
+						path='/new_story'
+						render={props => (
+							<CreateBlog
+								{...props}
+								loggedInUser={this.state.loggedInUser}
+								loggedIn={this.state.loggedIn}
+								addStories={this.addStories}
+							/>
+						)}
 					/>
-					<Switch>
-						<Route
-							path='/new_story'
-							render={props => (
-								<CreateBlog
-									{...props}
-									loggedInUser={this.state.loggedInUser}
-									loggedIn={this.state.loggedIn}
-									addStories={this.addStories}
-								/>
-							)}
-						/>
-						{/* TODO: Route to profile Page */}
-						{/* <Route
+					{/* TODO: Route to profile Page */}
+					{/* <Route
 							path='/profile'
 							render={props => (
 								<CreateBlog
@@ -92,53 +150,59 @@ export default class App extends Component {
 								/>
 							)}
 						/> */}
-						<Route exact path='/stories'>
-							<PortfolioPage
+					<Route exact path='/stories'>
+						<PortfolioPage
+							loggedInUser={this.state.loggedInUser}
+							loggedIn={this.state.loggedIn}
+							handleClickEventStory={this.handleClickEventStory}
+							myStories={this.state.myStories}
+						/>
+					</Route>
+					<Route exact path='/login'>
+						<LogInForm />
+					</Route>
+					<Route path='/show-blog/:title'>
+						{this.state.story && (
+							<ShowBlogs
+								story={this.state.story}
+								goBackHome={this.goBackHome}
 								loggedInUser={this.state.loggedInUser}
-								loggedIn={this.state.loggedIn}
+								deleteStories={this.deleteStories}
+								stories={this.state.myStories}
+								addComment={this.addComment}
+								// newStory={this.state.newStory}
+							/>
+						)}
+					</Route>
+					<Route exact path='/signup'>
+						<LogInForm />
+					</Route>
+					<Route exact path='/'>
+						{this.state.loggedInUser && this.state.loggedIn ? (
+							<UserMainPage
+								loggedInUser={this.state.loggedInUser}
+								handleClickEventStory={this.handleClickEventStory}
+								myStories={this.state.myStories}
+							/>
+						) : (
+							<VisitorsPage
 								handleClickEventStory={this.handleClickEventStory}
 							/>
-						</Route>
-						<Route exact path='/login'>
-							<LogInForm />
-						</Route>
-						<Route path='/show-blog/:title'>
-							{this.state.story && (
-								<ShowBlogs
-									story={this.state.story}
-									goBackHome={this.goBackHome}
-									loggedInUser={this.state.loggedInUser}
-								/>
-							)}
-						</Route>
-						<Route exact path='/signup'>
-							<LogInForm />
-						</Route>
-						<Route exact path='/'>
-							{this.state.loggedInUser && this.state.loggedIn ? (
-								<UserMainPage
-									loggedInUser={this.state.loggedInUser}
-									handleClickEventStory={this.handleClickEventStory}
-								/>
-							) : (
-								<VisitorsPage
-									handleClickEventStory={this.handleClickEventStory}
-								/>
-							)}
-						</Route>
-					</Switch>
-					{this.state.story ? (
-						<Redirect
-							to={`/show-blog/${this.slugUrl(this.state.story.title)}`}
-						/>
-					) : (
-						<Redirect to='/' />
-					)}
-				</Router>
+						)}
+					</Route>
+				</Switch>
+				{this.state.story ? (
+					<Redirect to={`/show-blog/${this.slugUrl(this.state.story.title)}`} />
+				) : (
+					<Redirect to='/' />
+				)}
+				{/* </Router> */}
 			</div>
 		)
 	}
 }
+
+export default withRouter(App)
 
 const rc = {
 	id: 1,

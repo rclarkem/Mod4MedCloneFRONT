@@ -3,6 +3,7 @@ import StoryCard from './StoryCard'
 import { Container, Card } from 'semantic-ui-react'
 
 export default function Stories(props) {
+	console.log(props)
 	return (
 		<Container>
 			<Card.Group itemsPerRow={3}>

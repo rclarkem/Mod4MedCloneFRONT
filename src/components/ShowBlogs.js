@@ -11,6 +11,10 @@ export default class ShowBlogs extends Component {
 	onClick = () => this.setState(prevState => ({ active: !prevState.active }))
 
 	render() {
+		{
+			console.log(this.props.addComment)
+		}
+		// console.log(this.props.loggedInUser.id !== story.author_id)
 		const { story } = this.props
 		return (
 			<Container text style={{ marginTop: '7em' }}>
@@ -19,7 +23,7 @@ export default class ShowBlogs extends Component {
 				</Button>
 				<Header as='h1'>{story.title}</Header>
 				<Image className='ui mini avatar image' src={story.author_avatar} />
-				{this.props.loggedInUser &&
+				{!this.props.loggedInUser &&
 				this.props.loggedInUser.id !== story.author_id ? (
 					<ButtonFor
 						active={this.state.active}
@@ -31,11 +35,17 @@ export default class ShowBlogs extends Component {
 
 				<span>{story.author_full_name}</span>
 				<p>{story.body}</p>
-				<CommentContainer story={story} />
+				<CommentContainer
+					story={story}
+					addComment={this.props.addComment}
+					// myComments={this.props.myComments}
+				/>
 				<Header as='h4'>Story Options</Header>
 				<Button.Group>
 					<Button>Edit</Button>
-					<Button>Delete</Button>
+					<Button onClick={e => this.props.deleteStories(this.props.story)}>
+						Delete
+					</Button>
 				</Button.Group>
 			</Container>
 		)
