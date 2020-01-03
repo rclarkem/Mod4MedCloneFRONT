@@ -15,6 +15,7 @@ import VisitorsPage from './containers/VisitorsPage'
 import LogInForm from './NavBarComponents/LogInForm'
 import ShowBlogs from './components/ShowBlogs'
 import PortfolioPage from './containers/PortfolioPage'
+let r
 
 class App extends Component {
 	state = {
@@ -22,7 +23,6 @@ class App extends Component {
 		loggedInUser: rc,
 		story: null,
 		myStories: [],
-		newStory: false,
 	}
 
 	handleClickEventStory = storyObj => {
@@ -70,27 +70,6 @@ class App extends Component {
 			)
 	}
 
-	// addComment = async commentObj => {
-	// 	await fetch(`http://localhost:3000/comments`, {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify({
-	// 			...commentObj,
-	// 			author_id: this.state.loggedInUser.id,
-	// 			story_id: this.state.story.id,
-	// 		}),
-	// 	})
-	// 		.then(response => response.json())
-	// 		.then(comment => {
-	// 			this.setState({
-	// 				myStories: [...this.state.myStories, comment],
-	// 				newStory: true,
-	// 			})
-	// 		})
-	// }
-
 	deleteStories = storyObj => {
 		fetch(`http://localhost:3000/stories/${storyObj.id}`, {
 			method: 'DELETE',
@@ -114,8 +93,8 @@ class App extends Component {
 	// ! ComponentDidMount()
 
 	render() {
-		console.log('State', this.state.story)
-		console.log('State', this.state.myStories)
+		// console.log('State', this.state.story)
+		console.log('State', this.state.mySto)
 
 		return (
 			<div className='App'>
@@ -169,8 +148,6 @@ class App extends Component {
 								loggedInUser={this.state.loggedInUser}
 								deleteStories={this.deleteStories}
 								stories={this.state.myStories}
-								addComment={this.addComment}
-								// newStory={this.state.newStory}
 							/>
 						)}
 					</Route>

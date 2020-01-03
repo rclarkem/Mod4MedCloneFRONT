@@ -11,9 +11,6 @@ export default class ShowBlogs extends Component {
 	onClick = () => this.setState(prevState => ({ active: !prevState.active }))
 
 	render() {
-		{
-			console.log(this.props.addComment)
-		}
 		// console.log(this.props.loggedInUser.id !== story.author_id)
 		const { story } = this.props
 		return (
@@ -35,11 +32,7 @@ export default class ShowBlogs extends Component {
 
 				<span>{story.author_full_name}</span>
 				<p>{story.body}</p>
-				<CommentContainer
-					story={story}
-					addComment={this.props.addComment}
-					// myComments={this.props.myComments}
-				/>
+				<CommentContainer userID={this.props.loggedInUser.id} story={story} />
 				<Header as='h4'>Story Options</Header>
 				<Button.Group>
 					<Button>Edit</Button>
