@@ -39,43 +39,24 @@ export default class CommentContainer extends Component {
 	}
 
 	render() {
-		const comment = this.state.commentArray.map(comment => {
-			return <li>{comment.body}</li>
-		})
 		return (
 			<div>
-				<Comment.Group>
-					<Header as='h3' dividing>
-						Comments
-					</Header>
-					{/* {comment} */}
-					<Comment>
-						<Comment.Avatar src={comment.author_avatar} />
-						<Comment.Content>
-							<Comment.Author as='a'>{comment.author_full_name}</Comment.Author>
-							<Comment.Metadata>
-								<div>Today at 5:42PM</div>
-							</Comment.Metadata>
-							<Comment.Text>{comment}</Comment.Text>
-						</Comment.Content>
-					</Comment>
-					{/* {this.props.story.comments.map(comment => {
-						return <IndivComment comment={comment} key={comment.id} />
-					})} */}
-					<Form onSubmit={this.onSubmit}>
-						<Form.TextArea
-							name='body'
-							onChange={this.onChange}
-							value={this.state.body}
-						/>
-						<Button
-							content='Add Comment'
-							labelPosition='left'
-							icon='edit'
-							primary
-						/>
-					</Form>
-				</Comment.Group>
+				{this.state.commentArray.map(comment => {
+					return <IndivComment comment={comment} />
+				})}
+				<Form reply onSubmit={this.onSubmit}>
+					<Form.TextArea
+						name='body'
+						onChange={this.onChange}
+						value={this.state.body}
+					/>
+					<Button
+						content='Add Comment'
+						labelPosition='left'
+						icon='edit'
+						primary
+					/>
+				</Form>
 			</div>
 		)
 	}

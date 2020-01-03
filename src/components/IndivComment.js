@@ -2,21 +2,21 @@ import React from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
 export default function IndivComment(props) {
+	const time = () => {
+		let date = props.comment.created_at
+		return 'Today at ' + date
+	}
+
 	console.log(props)
 	return (
-		<div>
+		<Comment.Group>
 			<Comment>
-				<Comment.Avatar src={props.comment.author_avatar} />
+				<Comment.Avatar as='a' src={props.comment.author_avatar} />
 				<Comment.Content>
-					<Comment.Author as='a'>
-						{props.comment.author_full_name}
-					</Comment.Author>
-					<Comment.Metadata>
-						<div>Today at 5:42PM</div>
-					</Comment.Metadata>
+					<Comment.Author>{props.comment.author_full_name}</Comment.Author>
 					<Comment.Text>{props.comment.body}</Comment.Text>
 				</Comment.Content>
 			</Comment>
-		</div>
+		</Comment.Group>
 	)
 }
