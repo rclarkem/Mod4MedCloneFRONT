@@ -32,6 +32,7 @@ export default class CommentContainer extends Component {
 				console.log(comment)
 				this.setState({
 					commentArray: [...this.state.commentArray, comment],
+					body: '',
 				})
 			})
 
