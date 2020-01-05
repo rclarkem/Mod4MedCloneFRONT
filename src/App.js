@@ -20,7 +20,7 @@ let r
 class App extends Component {
 	state = {
 		loggedIn: true,
-		loggedInUser: rc,
+		loggedInUser: jamal,
 		story: null,
 		myStories: [],
 	}

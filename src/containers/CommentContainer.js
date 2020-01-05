@@ -43,7 +43,7 @@ export default class CommentContainer extends Component {
 		return (
 			<div>
 				{this.state.commentArray.map(comment => {
-					return <IndivComment comment={comment} />
+					return <IndivComment comment={comment} key={comment.id} />
 				})}
 				<Form reply onSubmit={this.onSubmit}>
 					<Form.TextArea
