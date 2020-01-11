@@ -11,6 +11,7 @@ export default class ShowBlogs extends Component {
 	onClick = () => this.setState(prevState => ({ active: !prevState.active }))
 
 	render() {
+		console.log('VISTOR', this.props)
 		// console.log(this.props.loggedInUser.id !== story.author_id)
 		const { story } = this.props
 		return (
@@ -20,19 +21,12 @@ export default class ShowBlogs extends Component {
 				</Button>
 				<Header as='h1'>{story.title}</Header>
 				<Image className='ui mini avatar image' src={story.author_avatar} />
-				{!this.props.loggedInUser &&
-				this.props.loggedInUser.id !== story.author_id ? (
-					<ButtonFor
-						active={this.state.active}
-						handleClick={this.onClick}
-						text1={'Follow'}
-						text2={'Followed'}
-					/>
-				) : null}
 
 				<span>{story.author_full_name}</span>
 				<p>{story.body}</p>
-				<CommentContainer userID={this.props.loggedInUser.id} story={story} />
+				{this.props.loggedInUser && (
+					<CommentContainer userID={this.props.loggedInUser.id} story={story} />
+				)}
 				<Header as='h4'>Story Options</Header>
 				<Button.Group>
 					<Button>Edit</Button>
@@ -44,3 +38,14 @@ export default class ShowBlogs extends Component {
 		)
 	}
 }
+
+// {
+// this.props.loggedInUser && this.props.loggedInUser.id !== story.author_id ? (
+// 		<ButtonFor
+// 			active={this.state.active}
+// 			handleClick={this.onClick}
+// 			text1={'Follow'}
+// 			text2={'Followed'}
+// 		/>
+// 	) : null
+// }

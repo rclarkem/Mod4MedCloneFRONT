@@ -42,13 +42,15 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		fetch(`http://localhost:3000/users/${this.state.loggedInUser.id}`)
-			.then(response => response.json())
-			.then(stories => {
-				this.setState({
-					myStories: stories.authored_stories,
+		if (this.state.loggedIn) {
+			fetch(`http://localhost:3000/users/${this.state.loggedInUser.id}`)
+				.then(response => response.json())
+				.then(stories => {
+					this.setState({
+						myStories: stories.authored_stories,
+					})
 				})
-			})
+		}
 	}
 
 	addStories = storyObj => {
@@ -94,7 +96,7 @@ class App extends Component {
 
 	render() {
 		// console.log('State', this.state.story)
-		console.log('State', this.state.mySto)
+		// console.log('State', this.state.mySto)
 
 		return (
 			<div className='App'>

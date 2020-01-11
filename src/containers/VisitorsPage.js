@@ -23,7 +23,7 @@ export default class VisitorsPage extends Component {
 	// TODO: Add a jumbotron welcoming to the site
 
 	render() {
-		// console.log(this.state.allStories)
+		console.log(this.state.allStories)
 
 		return (
 			<div>

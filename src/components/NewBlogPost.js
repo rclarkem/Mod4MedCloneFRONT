@@ -21,8 +21,6 @@ export default class NewPost extends Component {
 	}
 
 	render() {
-		console.log(this.state.title)
-		console.log(this.props)
 		return (
 			<div>
 				<Header body='Write Your Story' />
