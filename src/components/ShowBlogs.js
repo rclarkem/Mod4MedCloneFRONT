@@ -21,12 +21,20 @@ export default class ShowBlogs extends Component {
 				</Button>
 				<Header as='h1'>{story.title}</Header>
 				<Image className='ui mini avatar image' src={story.author_avatar} />
-
 				<span>{story.author_full_name}</span>
 				<p>{story.body}</p>
 				{this.props.loggedInUser && (
 					<CommentContainer userID={this.props.loggedInUser.id} story={story} />
 				)}
+				{this.props.loggedInUser &&
+				this.props.loggedInUser.id !== story.author_id ? (
+					<ButtonFor
+						active={this.state.active}
+						handleClick={this.onClick}
+						text1={'Follow'}
+						text2={'Followed'}
+					/>
+				) : null}
 				<Header as='h4'>Story Options</Header>
 				<Button.Group>
 					<Button>Edit</Button>
