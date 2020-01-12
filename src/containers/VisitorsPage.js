@@ -30,7 +30,7 @@ export default class VisitorsPage extends Component {
 				<Header body={'Recent Stories'} />
 				<Stories
 					stories={this.state.allStories}
-					vistor={true}
+					visitor={true}
 					handleClickEventStory={this.props.handleClickEventStory}
 				/>
 			</div>

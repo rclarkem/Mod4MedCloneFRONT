@@ -15,12 +15,11 @@ import VisitorsPage from './containers/VisitorsPage'
 import LogInForm from './NavBarComponents/LogInForm'
 import ShowBlogs from './components/ShowBlogs'
 import PortfolioPage from './containers/PortfolioPage'
-let r
 
 class App extends Component {
 	state = {
-		loggedIn: true,
-		loggedInUser: jamal,
+		loggedIn: false,
+		loggedInUser: null,
 		story: null,
 		myStories: [],
 	}

@@ -40,24 +40,30 @@ export default class CommentContainer extends Component {
 	}
 
 	render() {
+		console.log(this.props)
 		return (
 			<div>
 				{this.state.commentArray.map(comment => {
 					return <IndivComment comment={comment} key={comment.id} />
 				})}
-				<Form reply onSubmit={this.onSubmit}>
-					<Form.TextArea
-						name='body'
-						onChange={this.onChange}
-						value={this.state.body}
-					/>
-					<Button
-						content='Add Comment'
-						labelPosition='left'
-						icon='edit'
-						primary
-					/>
-				</Form>
+
+				<div>
+					{!this.props.visitor && (
+						<Form reply onSubmit={this.onSubmit}>
+							<Form.TextArea
+								name='body'
+								onChange={this.onChange}
+								value={this.state.body}
+							/>
+							<Button
+								content='Add Comment'
+								labelPosition='left'
+								icon='edit'
+								primary
+							/>
+						</Form>
+					)}
+				</div>
 			</div>
 		)
 	}

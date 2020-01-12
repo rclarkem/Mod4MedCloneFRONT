@@ -23,8 +23,10 @@ export default class ShowBlogs extends Component {
 				<Image className='ui mini avatar image' src={story.author_avatar} />
 				<span>{story.author_full_name}</span>
 				<p>{story.body}</p>
-				{this.props.loggedInUser && (
+				{this.props.loggedInUser ? (
 					<CommentContainer userID={this.props.loggedInUser.id} story={story} />
+				) : (
+					<CommentContainer story={story} visitor={true} />
 				)}
 				{this.props.loggedInUser &&
 				this.props.loggedInUser.id !== story.author_id ? (
@@ -35,13 +37,18 @@ export default class ShowBlogs extends Component {
 						text2={'Followed'}
 					/>
 				) : null}
-				<Header as='h4'>Story Options</Header>
-				<Button.Group>
-					<Button>Edit</Button>
-					<Button onClick={e => this.props.deleteStories(this.props.story)}>
-						Delete
-					</Button>
-				</Button.Group>
+				{this.props.loggedInUser &&
+				this.props.loggedInUser.id === story.author_id ? (
+					<Container>
+						<Header as='h4'>Story Options</Header>
+						<Button.Group>
+							<Button>Edit</Button>
+							<Button onClick={e => this.props.deleteStories(this.props.story)}>
+								Delete
+							</Button>
+						</Button.Group>
+					</Container>
+				) : null}
 			</Container>
 		)
 	}
