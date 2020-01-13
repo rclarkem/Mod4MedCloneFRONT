@@ -18,8 +18,8 @@ import PortfolioPage from './containers/PortfolioPage'
 
 class App extends Component {
 	state = {
-		loggedIn: true,
-		loggedInUser: jamal,
+		loggedIn: false,
+		loggedInUser: null,
 		story: null,
 		myStories: [],
 	}
