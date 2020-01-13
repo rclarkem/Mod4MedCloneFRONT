@@ -35,8 +35,6 @@ export default class CommentContainer extends Component {
 					body: '',
 				})
 			})
-
-		// this.props.history.push('/stories')
 	}
 
 	render() {
