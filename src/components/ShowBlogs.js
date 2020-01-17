@@ -16,20 +16,18 @@ export default class ShowBlogs extends Component {
 		const { story } = this.props
 		return (
 			<Container text style={{ marginTop: '7em' }}>
-				<Button onClick={e => this.props.goBackHome(e.target.value)}>
-					Home
-				</Button>
+				<Button onClick={e => this.props.goBackHome(e.target.value)}>Home</Button>
 				<Header as='h1'>{story.title}</Header>
 				<Image className='ui mini avatar image' src={story.author_avatar} />
 				<span>{story.author_full_name}</span>
-				<p>{story.body}</p>
+				<Header as='h3'>{story.body}</Header>
+
 				{this.props.loggedInUser ? (
 					<CommentContainer userID={this.props.loggedInUser.id} story={story} />
 				) : (
 					<CommentContainer story={story} visitor={true} />
 				)}
-				{this.props.loggedInUser &&
-				this.props.loggedInUser.id !== story.author_id ? (
+				{this.props.loggedInUser && this.props.loggedInUser.id !== story.author_id ? (
 					<ButtonFor
 						active={this.state.active}
 						handleClick={this.onClick}
@@ -37,15 +35,12 @@ export default class ShowBlogs extends Component {
 						text2={'Followed'}
 					/>
 				) : null}
-				{this.props.loggedInUser &&
-				this.props.loggedInUser.id === story.author_id ? (
+				{this.props.loggedInUser && this.props.loggedInUser.id === story.author_id ? (
 					<Container>
 						<Header as='h4'>Story Options</Header>
 						<Button.Group>
 							<Button>Edit</Button>
-							<Button onClick={e => this.props.deleteStories(this.props.story)}>
-								Delete
-							</Button>
+							<Button onClick={e => this.props.deleteStories(this.props.story)}>Delete</Button>
 						</Button.Group>
 					</Container>
 				) : null}

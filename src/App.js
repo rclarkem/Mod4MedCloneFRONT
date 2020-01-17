@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import Navbar from './NavBarComponents/Navbar'
-import {
-	BrowserRouter as Router,
-	Route,
-	Switch,
-	Redirect,
-	withRouter,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import UserMainPage from './containers/UserMainPage'
 import CreateBlog from './components/CreateBlog'
 import BlogTitle from './components/BlogTitle'
@@ -18,8 +12,8 @@ import PortfolioPage from './containers/PortfolioPage'
 
 class App extends Component {
 	state = {
-		loggedIn: true,
-		loggedInUser: rc,
+		loggedIn: false,
+		loggedInUser: null,
 		story: null,
 		myStories: [],
 	}
@@ -52,6 +46,31 @@ class App extends Component {
 		}
 	}
 
+	// addUser = () => {
+	// 	fetch('http://localhost:3000/users', {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 			Accept: 'application/json',
+	// 		},
+	// 		body: JSON.stringify({
+	// 			user: {
+	// 				name: 'guy',
+	// 				password: 'hi',
+	// 				email: 'teste12@edu.com',
+	// 				bio: 'King of Flavortown, USA',
+	// 				avatar:
+	// 					'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg',
+	// 				img: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg',
+	// 			},
+	// 		}),
+	// 	})
+	// 		.then(response => response.json())
+	// 		.then(response => {
+	// 			console.log(response)
+	// 		})
+	// }
+
 	addStories = storyObj => {
 		fetch('http://localhost:3000/stories', {
 			method: 'POST',
@@ -79,9 +98,7 @@ class App extends Component {
 			.then(deletedStory =>
 				this.setState(
 					{
-						myStories: this.state.myStories.filter(
-							story => deletedStory.id !== story.id,
-						),
+						myStories: this.state.myStories.filter(story => deletedStory.id !== story.id),
 					},
 					() => this.props.history.push('/stories'),
 				),
@@ -163,9 +180,7 @@ class App extends Component {
 								myStories={this.state.myStories}
 							/>
 						) : (
-							<VisitorsPage
-								handleClickEventStory={this.handleClickEventStory}
-							/>
+							<VisitorsPage handleClickEventStory={this.handleClickEventStory} />
 						)}
 					</Route>
 				</Switch>
