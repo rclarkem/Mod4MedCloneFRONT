@@ -6,14 +6,15 @@ import UserMainPage from './containers/UserMainPage'
 import CreateBlog from './components/CreateBlog'
 import BlogTitle from './components/BlogTitle'
 import VisitorsPage from './containers/VisitorsPage'
-import LogInForm from './components/LogInForm'
+import LogInForm from './forms/LogInForm'
 import ShowBlogs from './components/ShowBlogs'
 import PortfolioPage from './containers/PortfolioPage'
+import SignUp from './forms/SignUp'
 
 class App extends Component {
 	state = {
-		loggedIn: true,
-		loggedInUser: rc,
+		loggedIn: false,
+		loggedInUser: null,
 		story: null,
 		myStories: [],
 	}
@@ -39,6 +40,7 @@ class App extends Component {
 			fetch(`http://localhost:3000/users/${this.state.loggedInUser.id}`)
 				.then(response => response.json())
 				.then(stories => {
+					console.log(stories)
 					this.setState({
 						myStories: stories.authored_stories,
 					})
@@ -47,6 +49,7 @@ class App extends Component {
 	}
 
 	addStories = storyObj => {
+		// !Change to `/users/${loggedInUser.id}id/stories`
 		fetch('http://localhost:3000/stories', {
 			method: 'POST',
 			headers: {
@@ -88,6 +91,7 @@ class App extends Component {
 	render() {
 		// console.log('State', this.state.story)
 		// console.log('State', this.state.myStories)
+		// console.log('State', this.state.loggedInUser)
 
 		return (
 			<div className='App'>
@@ -144,7 +148,7 @@ class App extends Component {
 						)}
 					</Route>
 					<Route exact path='/signup'>
-						<LogInForm />
+						<SignUp />
 					</Route>
 					<Route exact path='/'>
 						{this.state.loggedInUser && this.state.loggedIn ? (

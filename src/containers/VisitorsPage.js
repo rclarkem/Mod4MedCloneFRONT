@@ -27,7 +27,7 @@ export default class VisitorsPage extends Component {
 
 		return (
 			<div>
-				<Header body={'Recent Stories'} />
+				<Header body={'Check Out These Recent Stories'} />
 				<Stories
 					stories={this.state.allStories}
 					visitor={true}

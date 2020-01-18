@@ -6,6 +6,7 @@ export default class NewPost extends Component {
 	state = {
 		title: '',
 		body: '',
+		// author_id: this.props.loggedinUser || token
 	}
 
 	onChange = e => {
