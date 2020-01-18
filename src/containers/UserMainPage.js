@@ -12,6 +12,7 @@ export default class MainPage extends Component {
 	}
 
 	render() {
+		console.log(this.props.myStories)
 		return (
 			<div>
 				<Header body='My Recent Stories' />

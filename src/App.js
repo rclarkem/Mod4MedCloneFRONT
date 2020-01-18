@@ -6,14 +6,14 @@ import UserMainPage from './containers/UserMainPage'
 import CreateBlog from './components/CreateBlog'
 import BlogTitle from './components/BlogTitle'
 import VisitorsPage from './containers/VisitorsPage'
-import LogInForm from './NavBarComponents/LogInForm'
+import LogInForm from './components/LogInForm'
 import ShowBlogs from './components/ShowBlogs'
 import PortfolioPage from './containers/PortfolioPage'
 
 class App extends Component {
 	state = {
-		loggedIn: false,
-		loggedInUser: null,
+		loggedIn: true,
+		loggedInUser: rc,
 		story: null,
 		myStories: [],
 	}
@@ -45,31 +45,6 @@ class App extends Component {
 				})
 		}
 	}
-
-	// addUser = () => {
-	// 	fetch('http://localhost:3000/users', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 			Accept: 'application/json',
-	// 		},
-	// 		body: JSON.stringify({
-	// 			user: {
-	// 				name: 'guy',
-	// 				password: 'hi',
-	// 				email: 'teste12@edu.com',
-	// 				bio: 'King of Flavortown, USA',
-	// 				avatar:
-	// 					'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg',
-	// 				img: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Guy_Fieri_at_Guantanamo_2.jpg',
-	// 			},
-	// 		}),
-	// 	})
-	// 		.then(response => response.json())
-	// 		.then(response => {
-	// 			console.log(response)
-	// 		})
-	// }
 
 	addStories = storyObj => {
 		fetch('http://localhost:3000/stories', {
@@ -112,12 +87,11 @@ class App extends Component {
 
 	render() {
 		// console.log('State', this.state.story)
-		// console.log('State', this.state.mySto)
+		// console.log('State', this.state.myStories)
 
 		return (
 			<div className='App'>
 				<BlogTitle />
-				{/* <Router> */}
 				<Navbar
 					loggedInUser={this.state.loggedInUser}
 					goBackHome={this.goBackHome}
@@ -189,7 +163,6 @@ class App extends Component {
 				) : (
 					<Redirect to='/' />
 				)}
-				{/* </Router> */}
 			</div>
 		)
 	}
@@ -201,7 +174,6 @@ const rc = {
 	id: 1,
 	name: 'RC',
 	email: 'RC@edu.com',
-	password_digest: '123',
 	avatar: '123',
 	bio: 'social media apps are evil',
 	img: 'https://robohash.org/idseditaque.png?size=300x300&set=set1',
@@ -211,7 +183,6 @@ const jamal = {
 	id: 3,
 	name: 'Jamal',
 	email: 'Jamal@edu.com',
-	password_digest: '123',
 	avatar: '123',
 	bio: 'FAAAAAXXXX Them',
 	img: 'https://robohash.org/eosfacerenumquam.png?size=300x300&set=set1',
